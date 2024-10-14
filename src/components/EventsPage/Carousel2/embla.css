@@ -1,0 +1,120 @@
+.carousel-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.embla {
+  overflow: hidden;
+  width: 100%;
+}
+
+.embla__container {
+  display: flex;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.15s ease;
+}
+
+.embla__slide {
+  position: relative;
+  flex: 0 0 33.333%;
+  padding: 10px;
+  box-sizing: border-box;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease; /* Animate opacity and transform */
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+}
+
+.card h2 {
+  margin-bottom: 10px;
+}
+
+.card p {
+  color: #555;
+}
+
+/* Style for the active card */
+.is-active .card {
+  opacity: 1;
+  transform: translateY(0);
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Style for the inactive cards */
+.is-inactive .card {
+  opacity: 0.5;
+  box-shadow: none;
+}
+
+/* Responsive behavior */
+@media (max-width: 900px) {
+  .embla__slide {
+    flex: 0 0 50%;
+  }
+}
+
+@media (max-width: 600px) {
+  .embla__slide {
+    flex: 0 0 100%;
+  }
+
+  .embla__prev,
+  .embla__next {
+    display: none;
+  }
+}
+
+/* Arrow styling */
+.embla__prev,
+.embla__next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.embla__prev {
+  left: -50px;
+}
+
+.embla__next {
+  right: -50px;
+}
+
+.embla__prev:disabled,
+.embla__next:disabled {
+  background-color: rgba(0, 0, 0, 0.2);
+  cursor: not-allowed;
+}
+.details-carousel-wrapper {
+  margin-top: 20px;
+  text-align: center;
+  overflow: hidden; /* Ensures slides that are offscreen don't affect layout */
+}
+
+.details-carousel {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  display: inline-block;
+  min-width: 300px;
+  white-space: nowrap;
+}
