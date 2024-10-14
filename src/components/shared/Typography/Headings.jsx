@@ -10,7 +10,7 @@ export const Heading2 = styled.h2`
 `;
 
 export const Heading3 = styled.h1`
-  ${tw`text-white/50 text-[70px] font-normal font-spaceX tracking-[3.50px]`}
+  ${tw`text-white/50 text-2xl xsm:text-4xl md:text-6xl font-normal font-spaceX  text-center`}
 `;
 
 export const LogoText = styled.h1`

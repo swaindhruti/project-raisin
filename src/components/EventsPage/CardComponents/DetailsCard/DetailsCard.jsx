@@ -9,11 +9,11 @@ import {
 function DetailsCard({ ImageURL, Heading, Description }) {
   return (
     <DescriptionCardContainer>
-      <DescriptionCardHeading>{Heading}</DescriptionCardHeading>
       <DescriptionCardInner>
+        <DescriptionCardHeading>{Heading}</DescriptionCardHeading>
         <DescriptionCardContent>{Description}</DescriptionCardContent>
-        <DescriptionCardImage image={ImageURL} />
       </DescriptionCardInner>
+      <DescriptionCardImage image={ImageURL} />
     </DescriptionCardContainer>
   );
 }
