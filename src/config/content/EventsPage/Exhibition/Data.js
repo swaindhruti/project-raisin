@@ -1,4 +1,4 @@
-const exibitions = [
+export const exibitions = [
   {
     title: 'IRIDESCENCE',
     description:

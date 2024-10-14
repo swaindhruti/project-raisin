@@ -1,4 +1,4 @@
-const dtsShows = [
+export const dtsShows = [
   {
     title: 'Showdown',
     description:
