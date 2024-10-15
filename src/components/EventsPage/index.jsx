@@ -1,7 +1,8 @@
 import DualCarousel from './Carousel/DualCarousel/DualCarousel';
+import { SliderEventsWrapper } from './Carousel/PreviewCarousel/EventWrapper';
 
 const MainCarousel = ({ previewItems, descriptionItems }) => {
-  return <DualCarousel previewItems={previewItems} descriptionItems={descriptionItems} />;
+  return <SliderEventsWrapper />;
 };
 
 export default MainCarousel;

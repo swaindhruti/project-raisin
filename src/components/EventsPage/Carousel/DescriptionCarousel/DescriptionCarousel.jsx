@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import DetailsCard from '../../CardComponents/DetailsCard/DetailsCard';
 import tw, { styled } from 'twin.macro';
+import { GL_descriptionItems } from '@/config/content/EventsPage/GuestLecture/Data';
 
 const DescriptionContainer = styled.div`
   ${tw`w-full mt-4 overflow-hidden`}
@@ -12,7 +13,7 @@ const DescriptionSlide = styled(motion.div)`
   ${tw` left-0 w-full flex justify-center`}
 `;
 
-const DescriptionCarousel = ({ items, currentIndex }) => {
+const DescriptionCarousel = ({ currentIndex }) => {
   const variants = {
     enter: { x: 50, opacity: 0, position: 'absolute' },
     center: { x: 0, opacity: 1, position: 'absolute' },
@@ -30,7 +31,7 @@ const DescriptionCarousel = ({ items, currentIndex }) => {
           exit='exit'
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <DetailsCard {...items[currentIndex]} />
+          <DetailsCard {...GL_descriptionItems[currentIndex]} />
         </DescriptionSlide>
       </AnimatePresence>
     </DescriptionContainer>

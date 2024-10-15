@@ -28,7 +28,6 @@ export const FE_previewItems = [
     ImageURL: 'https://picsum.photos/500',
     PreviewDescription:
       'Embark on a thrilling adventure through a maze built inside a tent! Along the way, solve questions at checkpoints to progress. Your goal? Find and conquer as many checkpoints as possible before time runs out. The participants with the most checkpoints and correct answers will claim victory. Test your problem-solving, strategy, and navigation in this exciting race against time!',
-    // other props for Preview
   },
   {
     id: 6,
