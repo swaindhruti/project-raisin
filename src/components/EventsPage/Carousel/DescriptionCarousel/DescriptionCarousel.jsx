@@ -13,7 +13,7 @@ const DescriptionSlide = styled(motion.div)`
   ${tw` left-0 w-full flex justify-center`}
 `;
 
-const DescriptionCarousel = ({ currentIndex }) => {
+const DescriptionCarousel = ({ currentIndex, descriptionItems }) => {
   const variants = {
     enter: { x: 50, opacity: 0, position: 'absolute' },
     center: { x: 0, opacity: 1, position: 'absolute' },
@@ -31,7 +31,7 @@ const DescriptionCarousel = ({ currentIndex }) => {
           exit='exit'
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <DetailsCard {...GL_descriptionItems[currentIndex]} />
+          <DetailsCard {...descriptionItems[currentIndex]} />
         </DescriptionSlide>
       </AnimatePresence>
     </DescriptionContainer>

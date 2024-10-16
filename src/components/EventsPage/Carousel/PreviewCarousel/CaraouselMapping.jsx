@@ -1,64 +1,81 @@
 import { SliderData } from '@/config/content/eventsCarauselData';
-import { motion } from 'framer-motion';
+// import { EventCard } from '../eventCardComponents/EventCard';
+import { useEffect, useRef } from 'react';
+import { useAnimate } from 'framer-motion';
 import PreviewCard from '../../CardComponents/PreviewCard/PreviewCard';
+import { GL_previewItems } from '@/config/content/EventsPage/GuestLecture/Data';
 
-export const CarouselMapping = ({ currentIndex }) => {
+export const CarouselMapping = ({ currentIndex, previewItems }) => {
+  const [scope, animate] = useAnimate();
+  const refs = useRef([]);
+
+  useEffect(() => {
+    previewItems.forEach((_, index) => {
+      const isCurrent = index === currentIndex;
+      const isPrev = index === (currentIndex - 1 + SliderData.length) % SliderData.length;
+      const isNext = index === (currentIndex + 1) % SliderData.length;
+      const isPrevToPrev = index === (currentIndex - 2 + SliderData.length) % SliderData.length;
+      const isNextToNext = index === (currentIndex + 2) % SliderData.length;
+
+      let transform = 'translateY(0px)';
+      let opacity = 0.3;
+      let zIndex = 1;
+
+      if (isPrevToPrev || isNextToNext) {
+        (currentIndex === 0 && isPrevToPrev) ||
+        (currentIndex === SliderData.length - 1 && isNextToNext)
+          ? (opacity = 0.3)
+          : (opacity = 0);
+        zIndex = 0;
+      }
+
+      if (isPrev) {
+        transform = 'translateX(-10px)translateY(0px)';
+        opacity = 0.3;
+        zIndex = 10;
+      }
+
+      if (isNext) {
+        transform = 'translateX(10px)translateY(0px)';
+        opacity = 0.3;
+        zIndex = 10;
+      }
+
+      if (isCurrent) {
+        transform = 'translateY(-200px)';
+        opacity = 1;
+        zIndex = 51;
+      }
+
+      animate(
+        refs.current[index],
+        {
+          transform,
+          opacity,
+          zIndex,
+        },
+        {
+          type: 'tween',
+          duration: 0.3,
+          ease: [0.42, 0, 0.58, 1],
+        },
+      );
+    });
+  }, [currentIndex, animate]);
+
   return (
     <>
-      {SliderData.map((item, index) => {
+      {previewItems.map((item, index) => {
         const isCurrent = index === currentIndex;
-        const isPrev = index === (currentIndex - 1 + SliderData.length) % SliderData.length;
-        const isNext = index === (currentIndex + 1) % SliderData.length;
-        const isPrevToPrev = index === (currentIndex - 2 + SliderData.length) % SliderData.length;
-        const isNextToNext = index === (currentIndex + 2) % SliderData.length;
-
-        // Default values for each card
-        let transform = 'translateX(0px)'; // centered
-        let opacity = 0.3; // lower opacity for non-current cards
-        let zIndex = 1; // default z-index
-        let scale = 1; // smaller for non-current cards
-
-        if (isPrev || isNext) {
-          // Ensure prev and next are symmetrical and lower
-          transform = `translateY(0px)`;
-          opacity = 0.3; // Make opacity smoother
-          zIndex = 10;
-          scale = 1; // Slightly larger than background cards but smaller than current
-        }
-
-        if (isPrevToPrev || isNextToNext) {
-          opacity = 0; // Fully hide the cards further away
-          zIndex = 0;
-        }
-
-        if (isCurrent) {
-          // Current card is 50px above and full opacity
-          transform = 'translateY(-150px)';
-          opacity = 1;
-          zIndex = 51;
-          scale = 1;
-        }
 
         return (
-          <motion.div
+          <div
             key={index}
-            className='w-full relative transition-all duration-700 ease-[0.25, 0.1, 0.25, 1] left-[5%] md:left-[8%] lg:left-[12%] xl:left-[19.5%]'
-            style={{
-              zIndex,
-              transform, // Apply the updated transform
-              scale,
-            }}
-            animate={{
-              opacity, // Apply seamless opacity change
-            }}
-            transition={{
-              type: 'tween',
-              duration: 0.5, // Smooth transition duration
-              ease: [0.42, 0, 0.58, 1], // Ease for smooth effect
-            }}
+            className={`w-[456.74px] m-2 relative transition-all duration-700 ease-[0.25, 0.1, 0.25, 1] left-[5%] md:left-[8%] lg:left-[12%] xl:left-[15%]`}
+            ref={(el) => (refs.current[index] = el)}
           >
-            <PreviewCard PreviewDescription={item.desc} ImageURL={item.url} />
-          </motion.div>
+            <PreviewCard PreviewDescription={item.PreviewDescription} ImageURL={item.ImageURL} />
+          </div>
         );
       })}
     </>

@@ -2,11 +2,11 @@ import tw from 'twin.macro';
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  ${tw`w-full min-h-screen h-auto flex flex-col -mt-32 content-center `}
+  ${tw`w-full min-h-screen h-auto flex flex-col -mt-32`}
 `;
 
 export const SliderContainer = styled.div`
-  ${tw`pb-5  overflow-x-hidden overflow-y-visible relative`}
+  ${tw`pb-5 overflow-x-hidden overflow-y-visible relative`}
 `;
 
 export const SwiperConatiner = styled.div`

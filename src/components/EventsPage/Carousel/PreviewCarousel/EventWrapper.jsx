@@ -1,53 +1,31 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
 import { useAnimate } from 'framer-motion';
-// import { SButtons } from '../utils/SliderButtons';
 import { CarouselMapping } from './CaraouselMapping';
-import { SliderData } from '@/config/content/eventsCarauselData';
 
 import { SliderContainer, Wrapper } from './EventWrapper.styles';
-// import { MobileViewSwipe } from '../utils/SwiperforPhone/ForMobileview';
 import DescriptionCarousel from '../DescriptionCarousel/DescriptionCarousel';
-import { SButtons } from './SliderButtons';
-import { LeftArrowButton } from '../../Shared/ArrowButton';
+import { LeftArrowButton, RightArrowButton } from '../../Shared/ArrowButton';
 
-export const SliderEventsWrapper = () => {
+export const SliderEventsWrapper = ({ previewItems, descriptionItems }) => {
   const [scope, animate] = useAnimate();
   const [currentIndex, setCurrentIndex] = useState(0);
-  // const [isMobile, setIsMobile] = useState(false);
-  // const swiperRef = useRef(null);
-
-  // const updateScreenSize = () => {
-  //   setIsMobile(window.innerWidth < 700);
-  // };
-
-  // useEffect(() => {
-  //   updateScreenSize();
-  //   window.addEventListener('resize', updateScreenSize);
-
-  //   return () => window.removeEventListener('resize', updateScreenSize);
-  // }, []);
-
   const slideWidth = 456.74;
+  const autoSlideIntervalRef = useRef(null);
 
   const handleNext = () => {
-    console.log('Current Index:', currentIndex);
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % SliderData.length);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % previewItems.length);
+    resetAutoSlide();
   };
 
   const handlePrev = () => {
-    console.log('Current Index:', currentIndex);
-    setCurrentIndex((prevIndex) => (prevIndex === 0 ? SliderData.length - 1 : prevIndex - 1));
-  };
-
-  const onSlideChange = (swiper) => {
-    setCurrentIndex(swiper.realIndex);
+    setCurrentIndex((prevIndex) => (prevIndex === 0 ? previewItems.length - 1 : prevIndex - 1));
+    resetAutoSlide();
   };
 
   useEffect(() => {
     if (scope.current) {
       const xOffset = -currentIndex * slideWidth;
-      console.log('Animating to X:', xOffset);
       animate(
         scope.current,
         { x: xOffset },
@@ -60,31 +38,68 @@ export const SliderEventsWrapper = () => {
     }
   }, [currentIndex, animate, scope]);
 
+  const startAutoSlide = () => {
+    autoSlideIntervalRef.current = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % previewItems.length);
+    }, 2000);
+  };
+
+  const resetAutoSlide = () => {
+    if (autoSlideIntervalRef.current) {
+      clearInterval(autoSlideIntervalRef.current);
+    }
+    startAutoSlide();
+  };
+
+  useEffect(() => {
+    startAutoSlide();
+    return () => {
+      if (autoSlideIntervalRef.current) {
+        clearInterval(autoSlideIntervalRef.current);
+      }
+    };
+  }, []);
+
   return (
     <Wrapper>
-      <SliderContainer>
-        <div
-          ref={scope}
-          className='flex gap-8 mt-64 transition-transform'
+      <div className='h-full justify-center items-center relative'>
+        <LeftArrowButton
+          onClick={handlePrev}
           style={{
-            width: `${SliderData.length * slideWidth}px`,
-            transform: `translateX(calc(50% - ${slideWidth / 2}px))`,
+            position: 'absolute',
+            left: '10px',
+            top: '35%',
+            zIndex: 10,
           }}
-        >
-          <CarouselMapping currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} />
-        </div>
-        <DescriptionCarousel currentIndex={currentIndex} />
-      </SliderContainer>
-      <LeftArrowButton onClick={handlePrev}></LeftArrowButton>
-      <SButtons fn1={handlePrev} fn2={handleNext} currentindex={currentIndex} />
+        />
+        <SliderContainer>
+          <div
+            ref={scope}
+            className='flex justify-center items-center mt-64 transition-transform'
+            style={{
+              width: `${previewItems.length * slideWidth}px`,
+              transform: `translateX(calc(50% - ${slideWidth / 2}px))`,
+            }}
+          >
+            <CarouselMapping
+              currentIndex={currentIndex}
+              previewItems={previewItems}
+              setCurrentIndex={setCurrentIndex}
+            />
+          </div>
+          <DescriptionCarousel descriptionItems={descriptionItems} currentIndex={currentIndex} />
+        </SliderContainer>
+        <RightArrowButton
+          onClick={handleNext}
+          style={{
+            position: 'absolute',
+            right: '10px',
+            top: '35%',
+            transform: 'translateY(-50%)',
+            zIndex: 10,
+          }}
+        />
+      </div>
     </Wrapper>
-    // ) : (
-    //   <MobileViewSwipe
-    //     handlePrev={handlePrev}
-    //     handleNext={handleNext}
-    //     onSlideChange={onSlideChange}
-    //     swiperRef={swiperRef}
-    //     currentIndex={currentIndex}
-    //   />
   );
 };
