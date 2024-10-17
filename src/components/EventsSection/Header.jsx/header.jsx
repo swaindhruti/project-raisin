@@ -1,4 +1,4 @@
-import { BodyTitle } from '@/components/AboutUs/body.styles';
+import { BodyTitle } from '@/components/AboutUs/AboutUs.styles';
 
 export const Header = () => {
   return (

@@ -2,11 +2,11 @@
 
 import Navbar from '@/components/Marginals/navbar/navbar';
 import Hero from '@/components/Hero Section/Hero';
-import { AboutUsMain } from '@/components/AboutUs/Main';
+import { AboutUsMain } from '@/components/AboutUs/AboutUs';
 import { Footer } from '@/components/Footer/Footer';
 import { EventSectionMain } from '@/components/EventsSection/wrapperComponents/Main';
-import { StatisticsMain } from '@/components/Statistics/wrapper/Main';
-import SponsorSection from '@/components/Sponsers/sponsors';
+import { StatisticsMain } from '@/components/Statistics/Wrapper/Wrapper.jsx';
+import SponsorSection from '@/components/Sponsors/Sponsors';
 
 const Page = () => {
   return (

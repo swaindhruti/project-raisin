@@ -9,11 +9,11 @@ import {
   BodyColumnHeading,
   BodyColumnText,
   BodyGradient,
-} from './body.styles';
+} from './AboutUs.styles';
 
 import { easeIn, easeInOut, motion } from 'framer-motion';
 
-export const Body = () => {
+export const AboutUsMain = () => {
   const [trimmedFirstCol, setTrimmedFirstCol] = useState(firstcol.text);
   const [readMoreFirstCol, setReadMoreFirstCol] = useState(false);
   const [isMobile, setIsMobile] = useState(false);

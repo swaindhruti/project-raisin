@@ -38,6 +38,7 @@ module.exports = {
         inter: 'var(--font-inter)',
         spaceX: 'var(--font-spacex)',
         spaceGrotesk: 'var(--font-space_grotesk)',
+        bulgatti: 'var(--font-bulgatti)',
       },
       keyframes: {
         glow: {

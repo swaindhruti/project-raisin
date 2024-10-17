@@ -1,16 +1,20 @@
-import { BodyTitle } from '@/components/AboutUs/body.styles';
-import { JetImage } from './JetImage';
+import { BodyTitle } from '@/components/AboutUs/AboutUs.styles';
+import Image from 'next/image';
+import { HeaderContainer, JetImageContainer, EmptyContainer } from './Header.styles';
 
 export const Header = () => {
   return (
-    <>
-      <div className='w-full flex justify-center sm:justify-between items-center overflow-hidden'>
-        <div className='w-1/3  max-sm:hidden '>
-          <JetImage />
-        </div>
-        <BodyTitle className='flex justify-center items-center'>STATISTICS</BodyTitle>
-        <div className='w-1/3  sm:block hidden'></div>
-      </div>
-    </>
+    <HeaderContainer>
+      <JetImageContainer>
+        <Image
+          height={198}
+          width={171}
+          src='https://res.cloudinary.com/dfe8sdlkc/image/upload/v1728814755/jet_ji9kty.png'
+          alt='jetImage'
+        />
+      </JetImageContainer>
+      <BodyTitle>STATISTICS</BodyTitle>
+      <EmptyContainer />
+    </HeaderContainer>
   );
 };

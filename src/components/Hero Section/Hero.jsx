@@ -2,7 +2,16 @@ import './Hero.css';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { HeroGreenPrimaryButton, HeroLogoText, HeroPrimaryButton } from './styles';
+import {
+  HeroContainer,
+  HeroImageContainer,
+  HeroGreenPrimaryButton,
+  HeroLogoText,
+  HeroPrimaryButton,
+  HeroContent,
+  HeroDescription,
+  HeroFooterText,
+} from './Hero.styles';
 
 const Hero = () => {
   const container = {
@@ -23,7 +32,7 @@ const Hero = () => {
   };
 
   return (
-    <div className='relative h-screen overflow-hidden md:h-[105vh] flex-col justify-center items-center'>
+    <HeroContainer>
       <motion.div
         className='absolute inset-0 -z-10 bg-hero-primary bottom-[-32%] lg:bottom-0'
         initial={{ opacity: 0 }}
@@ -37,14 +46,14 @@ const Hero = () => {
         initial='hidden'
         animate='visible'
       >
-        <div className='relative aspect-square md:w-[90%] max-h-[90%] -translate-x-8 transition-all duration-200 md:-translate-x-0 h-[87dvh] xxxs:h-[85dvh]'>
+        <HeroImageContainer>
           <Image
             src='https://res.cloudinary.com/dpmlrxlzr/image/upload/v1728970226/robot_embkcs.png'
             alt='Robot image'
             fill
             style={{ objectFit: 'contain' }}
           />
-        </div>
+        </HeroImageContainer>
       </motion.div>
 
       <motion.div
@@ -53,7 +62,7 @@ const Hero = () => {
         animate='visible'
         variants={container}
       >
-        <div className='flex flex-col items-end leading-none'>
+        <HeroContent>
           <HeroLogoText className='flicker'>INNOVISION</HeroLogoText>
           <motion.div
             className=''
@@ -72,7 +81,7 @@ const Hero = () => {
               </text>
             </svg>
           </motion.div>
-        </div>
+        </HeroContent>
 
         <motion.div
           className='h-auto py-[50px] flex flex-col justify-center items-center relative gap-2 mb-12 md:mb-0 px-[10px]'
@@ -80,12 +89,12 @@ const Hero = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 1.5, delay: 0.5 }}
         >
-          <div className='text-base sm:text-xl md:text-2xl font-thin text-center font-prompt pb-[20px]'>
+          <HeroDescription>
             Navigating the tech cosmos and shaping the future landscape
-          </div>
-          <div className='font-bulgatti absolute bottom-0 right-20 lg:right-10 translate-x-[20%] md:translate-x-1/2 scale-[70%] md:scale-80 lg:scale-100 translate-y-1/2 md:translate-y-[20%]'>
+          </HeroDescription>
+          <HeroFooterText>
             <Image src='/assets/images/are_u_ready.svg' alt='' width={300} height={100} />
-          </div>
+          </HeroFooterText>
         </motion.div>
 
         <motion.div
@@ -109,7 +118,7 @@ const Hero = () => {
           </Link>
         </motion.div>
       </motion.div>
-    </div>
+    </HeroContainer>
   );
 };
 
